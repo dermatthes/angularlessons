@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="de.leuffen.helloWorld" ng-controller="SiteCtrl as ctrl">
+<head>
+    <meta charset="UTF-8">
+    <title>{{site.title}}</title>
+</head>
+<body >
+
+    <h1>Inject string values (escaped)</h1>
+    <div>
+        Anzahl clicks: {{site.clicks}}
+        <input type="number" value="1" ng-model="mNumber[1]">
+        <button ng-click="clickIt(mNumber[1])">click me</button>
+        <button ng-click="ctrl.callController()">Direct Controller click</button>
+    </div>
+
+
+    <div ng-controller="SubCtrl">
+        <h1>Inject string values (in SubConroller)</h1>
+        Anzahl Subclicks: {{site.subClicks}} Clicks: {{site.clicks}}
+
+        <button ng-click="clickIt()">click me</button>
+        <button ng-click="$parent.clickIt()">click me on parent</button>
+    </div>
+
+</body>
+
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script language="JavaScript">
+    var app = angular.module("de.leuffen.helloWorld", []);
+
+    /* Achtung: angular.module funktioniert nicht ohne den zweiten Parameter - auch wenn er ein leeres Array ist */
+
+    var siteCtrl = app.controller ("SiteCtrl", function ($scope, $interval) {
+
+
+        $scope.site = {
+            title: "Some crazy site title",
+            clicks: 0
+        };
+
+        $scope.clickIt = function (number) {
+            console.log ("clickme", number);
+            $scope.site.clicks += number ;
+        };
+
+
+        this.callController = function () {
+            console.log ("Clickcontroller");
+        }
+
+    });
+
+
+    app.controller ("SubCtrl", function ($scope, $interval) {
+        $scope.site = {
+            clicks: 0,
+            subClicks: 0
+        };
+
+        $scope.clickIt = function (data) {
+            console.log (data);
+            $scope.site.subClicks++;
+            $scope.site.clicks++;
+        };
+    });
+
+</script>
+
+</html>

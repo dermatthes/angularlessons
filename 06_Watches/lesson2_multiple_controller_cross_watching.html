@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="de.leuffen.helloWorld" ng-controller="SiteCtrl as site">
+<head>
+    <meta charset="UTF-8">
+    <title>{{site.title}} {{site.numberSelector1}}</title>
+</head>
+<body >
+
+    <h1>In cart: {{site.totalInCart}}</h1>
+    <div>
+        Anzahl clicks: {{site.numberSelector1}}
+        <input type="number" id="counter2" ng-model="site.numberSelector1">
+    </div>
+
+
+    <div ng-controller="CartCtrl as cart">
+        Anzahl Artikel {{cart.itemCount}}
+        <button ng-click="cart.addItem()">In Warenkorb</button>
+    </div>
+
+</body>
+
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>
+<script language="JavaScript">
+    var app = angular.module("de.leuffen.helloWorld", []);
+
+    /* Achtung: angular.module funktioniert nicht ohne den zweiten Parameter - auch wenn er ein leeres Array ist */
+
+    app.controller ("SiteCtrl", function ($scope) {
+        var self = this;
+        this.title = "Site title";
+        this.numberSelector1 = 1;
+
+        this.totalInCart = 0;
+
+        $scope.$on ("changeCartQtty", function (event, args) {
+            console.log ("changCartQtty event in", event, args);
+            self.totalInCart = args.itemCount;
+        });
+
+        $scope.$watch (function () {return self.numberSelector1}, function (oldVal, newVal) {
+            console.log ("Changed from", oldVal, "to", newVal);
+        });
+    });
+
+
+    app.controller ("CartCtrl", function ($scope, $rootScope) {
+        var self=this;
+
+        this.items = [];
+        this.itemCount = 0;
+
+        $scope.$watch (function () {return self.items}, function () {
+            console.log ("Change detected");
+            self.itemCount = self.items.length;
+            $rootScope.$broadcast("changeCartQtty", {itemCount: self.itemCount});
+        }, true);
+
+        this.addItem = function () {
+            console.log("addItem()");
+            self.items.push({item: "Some item"});
+        }
+
+    });
+
+
+</script>
+
+</html>

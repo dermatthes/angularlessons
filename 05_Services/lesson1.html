@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="de.leuffen.helloWorld" ng-controller="SiteCtrl">
+<head>
+    <meta charset="UTF-8">
+    <title>{{site.title}}</title>
+</head>
+<body >
+
+    <h1>Inject string values (escaped)</h1>
+    <div>
+        Anzahl clicks: {{site.clicks}}
+        <input type="number" value="1" id="counter" ng-model="site.clicks">
+        <input type="number" id="counter2" ng-bind="site.clicks">
+        <button ng-click="clickIt(mNumber[1])">click me</button>
+    </div>
+
+
+    <div ng-controller="SubCtrl">
+        <h1>Inject string values (in SubConroller)</h1>
+        Anzahl Subclicks: {{site.subClicks}} Clicks: {{site.clicks}}
+
+        <button ng-click="clickIt()">click me</button>
+    </div>
+
+</body>
+
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>
+<script language="JavaScript">
+    var app = angular.module("de.leuffen.helloWorld", []);
+
+    /* Achtung: angular.module funktioniert nicht ohne den zweiten Parameter - auch wenn er ein leeres Array ist */
+
+
+    app.factory("CartService", function () {
+
+        return function () {
+            var self = this;
+            this.items = [];
+
+            this.addToCart = function (sku) {
+                self.items.push({sku: sku});
+            }
+        }
+
+    });
+
+
+
+
+    var siteCtrl = app.controller ("SiteCtrl", function ($scope, CartService) {
+        $scope.site = {
+            title: "Some crazy site title",
+            clicks: 0
+        };
+
+        $scope.clickIt = function (number) {
+            console.log ("clickme", number);
+            $scope.site.clicks += number ;
+        }
+    });
+
+
+
+
+
+    app.controller ("SubCtrl", function ($scope, $interval) {
+        $scope.site = {
+            clicks: 0,
+            subClicks: 0
+        };
+
+        $scope.clickIt = function () {
+            $scope.site.subClicks++;
+            $scope.site.clicks++;
+        };
+    });
+
+</script>
+
+</html>
