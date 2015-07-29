@@ -1,61 +1,30 @@
-/**
- *
- * @param data
- * @constructor
- */
-function Response (data) {
 
-    this.success = function (data) {
 
-    };
 
-    this.error = function (data) {
 
+var __Gis_ServiceLib = {
+
+    get: function (url, get, post) {
+
+    },
+
+
+    download: function () {
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+        element.setAttribute('download', filename);
+
+        element.style.display = 'none';
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
     }
 
-}
 
-/**
- *
- * @param url
- * @constructor
- */
-function Request (url) {
+};
 
-    this.url = url;
-
-    this.post = function (postData, getData) {
-        return new Response();
-    };
-
-    this.get = function (getData) {
-
-    };
-
-    this.delete = function (getData) {
-
-    };
-
-    this.put = function (getData) {
-
-    };
-
-    this.delete = function (getData) {
-
-    };
-}
-
-/**
- *
- * @constructor
- */
-function StubStorefront_SomeController () {
-
-    this.getSomeAction = function ($id, $data) {
-
-    }
-
-}
 
 
 
