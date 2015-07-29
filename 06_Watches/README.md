@@ -1,8 +1,12 @@
-# Watches
+# Datenmonitoring und Events
+
+## Watches  
 
 Watches werden dazu benutzt, um Änderungen an einer Variable festzustellen und darauf zu reagieren.
 
-## Angular 1.0 Methode
+
+
+### Angular 1.0 Methode
 
 Angular 1.0 unterstützt folgendes:
 
@@ -16,7 +20,7 @@ $scope.$watch ("title", function (old, new) {
 
 Dieser Syntax kann mit Angular 2.0 und dem Controller as Pattern nicht mehr verwendet werden!
 
-## Angular 2.0 Methode
+### Angular 2.0 Methode
 
 ```js
 
@@ -30,4 +34,31 @@ app.controller ("SiteCtrl", function ($scope) {
     });
 });
 
+```
+
+
+## Events
+
+Events sollten die einzige Art sein, mit der Controller untereinander kommunizieren.
+
+Auslösen eines Events:
+
+```js
+$broadcast(eventName, data)
+```
+
+Alle Events sollten in app.module.js wie folgt dokumentiert werden:
+
+```
+// app.js
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Custom events:
+ - 'authorization-message' - description of the message
+   - { user, role, action } - data format
+     - user - a string, which contains the username
+     - role - an ID of the role the user has
+     - action - specific ation the user tries to perform
+     
+ ..next event..
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 ```

@@ -61,7 +61,11 @@ Man sieht direkt, dass hier mindestens zwei Ebenen vermischt wurden:
 * __Routing__: 
 * __Controller__: Repräsentation der dargestellten Daten und verfügbaren Aktionen.
 
-## Was darf in den Controller
+### Was darf in den Controller
+
+__Grundsatz__ für die Gestaltung der Controller: __Je weniger, destso besser!__ Grund: Der Controller dient als
+Referenz, welche Funktionen und Daten zur Verfügung stehen und stellt die Verbindung zwischen Business-Logic (Services) und
+View (Template) her. Wird hier zu viel gemacht, geht die Übersichtlichkeit flöten.
 
 * __Darstellungsdaten__: 
     Der Controller sollte lediglich die Daten bereitstellen (als attribut), 
@@ -102,4 +106,11 @@ angular.module('Goats')
 }]);
 
 ```
+
+### Was darf nicht in den Controller
+
+Der Controller sollte folgendes nicht machen
+
+* __DOM-Manipulation__: 
+    D.h. z.B. Klassen oder Styles setzen. Dies kann i.d.R. direkt im Template gemacht werden
 
