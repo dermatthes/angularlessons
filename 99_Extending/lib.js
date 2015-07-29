@@ -1,4 +1,8 @@
-
+/**
+ *
+ * @param data
+ * @constructor
+ */
 function Response (data) {
 
     this.success = function (data) {
@@ -11,7 +15,11 @@ function Response (data) {
 
 }
 
-
+/**
+ *
+ * @param url
+ * @constructor
+ */
 function Request (url) {
 
     this.url = url;
@@ -37,21 +45,45 @@ function Request (url) {
     };
 }
 
+/**
+ *
+ * @constructor
+ */
+function StubStorefront_SomeController () {
 
-function CartService () {
-
-    this.cartItemData = [];
-
-    this.addItem = function ($id) {
-
-    };
-
-    this.rmItem = function ($id) {
-
-    };
-
-    this.sync = function () {
+    this.getSomeAction = function ($id, $data) {
 
     }
 
 }
+
+
+
+var ServiceLocator = {
+
+    storefront: {
+        SomeController: {
+            __url__: rootUrl + "",
+
+            indexAction: {
+                __url__: rootUrl + "/~",
+                /**
+                 *
+                 * @param params
+                 * @param postData
+                 * @return Response
+                 */
+                post: function (params, postData) {
+
+                },
+
+                link: function (params) {
+
+                }
+            }
+        }
+    }
+};
+
+ServiceLocator.storefront.SomeController.indexAction.post().success()
+
