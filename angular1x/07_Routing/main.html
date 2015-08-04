@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="de.leuffen.helloWorld" ng-controller="AppCtrl as app">
+<head>
+    <meta charset="UTF-8">
+    <title>{{app.site.title}}</title>
+</head>
+<body>
+    <h1>Some title: {{app.site.title}}</h1>
+    <a href="#/content/someContentName1">Some Content 1</a>
+    <a href="#/content/someContentName2">Some Content 2</a>
+    <a href="#/">Some Root</a>
+    <div ng-view></div>
+</body>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-route.js"></script>
+<script language="JavaScript">
+    var app = angular.module("de.leuffen.helloWorld", ["ngRoute"]);
+
+    /* Achtung: angular.module funktioniert nicht ohne den zweiten Parameter - auch wenn er ein leeres Array ist */
+
+
+
+
+    app.controller("AppCtrl", function () {
+        var parent = this;
+        this.changeTitle = function (newTitle) {
+            this.site.title = newTitle;
+        };
+
+       this.site = {
+           title: "SomeTitle"
+       };
+    });
+
+
+    app.config (function ($routeProvider) {
+        $routeProvider
+                .when ("/content/:contentId", {
+                    templateUrl: "tpl1.tpl.html",
+                    controller: "SiteCtrl",
+                    resolve: {
+                        title: function ($routeParams) {
+                            console.log ("Route:", $routeParams);
+                            return $routeParams.contentId;
+                        }
+
+                    }
+                })
+                .when ("/", {
+                    controller: "SiteCtrl",
+                    resolve: {
+
+                        title: function ($routeParams) {
+                            return "Root Site Title";
+                        }
+
+                    }
+                })
+                .otherwise ({
+                    templateUrl: "tpl1.tpl.html",
+                    controller: "SiteCtrl",
+                    resolve: {
+                        title: function ($routeParams) {
+                            return "Other sitde";
+                        }
+
+                    }
+                });
+    });
+
+
+    app.controller ("SiteCtrl", function ($scope, title) {
+        //var self = this;
+
+        this.site.title = title;
+
+        console.log ("Call SiteCtrl");
+
+        $scope.$watch (function () {return self.numberSelector1}, function (oldVal, newVal) {
+            console.log ("Changed from", oldVal, "to", newVal);
+        });
+        return angular.extend($scope, this);
+    });
+
+</script>
+
+</html>
