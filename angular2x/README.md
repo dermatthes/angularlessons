@@ -1,5 +1,7 @@
 # Angular 2.0 aware best practise
 
+## Aufbauorganisation und Definition des Projekts
+
 Folgende Ziele werden verfolgt:
 
 * __Klare Dateizuordnung__: Ein Modul / Service muss anhand seines Namens eindeutig auf eine
@@ -15,17 +17,23 @@ Folgende Ziele werden verfolgt:
   kleine Dateien und fördert die Übersichtlichkeit, da auf einem Blick (optimalerweise) alle genutzten
   Controller und Services sowie die Konfiguration ersichtlich wird.
 
-## Directory structure
+### Directory structure
 
 Keep data together:
 
-* There is no practical solution to map names to files. So we put everything used by one module
+* __One file module-policy__: There is no practical solution to map names to files. So we put everything used by one module
   into one file.
   
-* Die Hauptdatei `<modname>.js` trägt den Namen des parent-Vereichnis. Dies klingt zunächst doppelt-gemoppelt, hat 
+* __Die Hauptdatei `<modname>.js` trägt den Namen des parent-Vereichnis.__ Dies klingt zunächst doppelt-gemoppelt, hat 
   jedoch folgenden Grund: Die Alternative wäre nämlich, die Hauptdatei immer `module.js` o.ä. zu nennen - 
   Allerdings kann das zu Problemen mit der IDE führen, da diese normalerweise nur den Dateinamen (ohne Verzeichnis) 
   in der Schnellansicht anzeigen. Außerdem zeigt auch GIT in der Schnellansicht die Änderungen nur per Dateinamen an.
+
+* __Singular für alle Namen__: Wie bei Modellen werden auch hier alle Namen im Singular formuliert. Das hat
+  drei Gründe: Erstens sollte man sich auf eines von beiden festlegen. Zweitens sehen die namespaces besser aus und
+  sind meisst sogar einen buchstaben kürzer: Beispiel: "service.MusicService" liest sich besser als "services.MusicService".
+  Drittens: Die Pluralform lässt sich oft schlechter tippen: "service" vs. "services", "module" vs "modules" und 
+  z.T. sind Sonderformen zu beachten: "child" vs. "children"
 
 ```
 ---- app/
@@ -53,7 +61,7 @@ Keep data together:
 ```
 
 
-## Defining Modules
+### Defining Modules
 
 Modules sind Kompostitionen aus Controllern, Configurations und Services. Sie sind die Darstellung
 der Daten.
@@ -84,7 +92,7 @@ Sollte die Datei zu groß werden, können Services, die ausschließlich von dies
 konsumiert werden auch unter dessen Namespace als eigene Datei gespeichert werden:
 
 
-## Services (global)
+### Services (global)
 
 Wird ein Service von mehr als einem Modul genutzt, ist dieser unterhalb des Namesapce
 `service.` anzulegen.
@@ -107,6 +115,37 @@ function SomeService (param) {
 angular.module ("service.<serviceName>", []).factory ("SomeService", function () { return new SomeService() });
 
 ```
+
+
+## Best-Practise
+
+### `$scope` sollte nicht mehr genutzt werden
+
+Die Nutzung von `$scope` wird in Angular 2.0 deprecated sein. Stattdessen wird `this` genutzt, um Daten
+an den View zu senden.
+
+Beispiel:
+
+```js
+this.title = "newSiteTitle";
+```
+
+Im Template wird die `controller as` Konstruktion genutzt:
+
+```html
+<html ng-controller="SiteCtrl as site">
+    <head>
+       <title>{{site.title}}</title>
+    </head>
+```
+
+### Setzen von Werten im Parent-Scope
+
+Im Gegensatz zur nutzung von `$scope` können auf diese Weise keine Methoden/Werte im paren-Scope
+gesetzt werden. Soll z.B. der titel auch von ChildCtrl aus geändert werden können, so muss der
+Title vorher als Service zu definieren:
+
+Es kann sich lohnen, hier eine PageService anzulegen, der alle Bereiche einer Seite abdeckt.
 
 
 
