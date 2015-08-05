@@ -147,6 +147,25 @@ Title vorher als Service zu definieren:
 
 Es kann sich lohnen, hier eine PageService anzulegen, der alle Bereiche einer Seite abdeckt.
 
+### $watch() - Ausdrücke vermeiden
 
+Click-Events usw. sollten auf Methods im Controller mappen:
+
+```
+this.clickXy = function () {
+}
+```
+
+Im Template
+
+```
+<a ng-click="clickXy()">Click me</a>
+```
+
+### Keine-DOM-Manipulation vom Controller aus
+
+Das Template sollte vom Controller nicht per DOM-Manipulation aus modifiziert werden. (z.B. indem
+jQuery genutzt wird, um Klassen umzubiegen).
+ 
 
 
