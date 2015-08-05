@@ -1,5 +1,20 @@
 # Angular 2.0 aware best practise
 
+Folgende Ziele werden verfolgt:
+
+* __Klare Dateizuordnung__: Ein Modul / Service muss anhand seines Namens eindeutig auf eine
+  Datei abbildbar sein. 
+  
+* __Gruppierungsfunktion__: Zusammenhängende Teile sollen zusammen bleiben: Ein Template, das ausschließlich
+  in einem Modul genutzt wird, soll auch im gleichen Verzeichnis liegen. Erstens, um es schneller zu finden,
+  zweitens um sich schneller einen Überblick über den Funktionsumfang verschaffen zu können. Es wird daher nicht
+  funktional gruppliert sondern modular.
+  
+* __Große Dateien__: Ausschließlich innerhalb eines Modules genutzte services etc. sollten, insoweit sie 
+  überschaubar bleiben, innerhalb der Hauptdatei definiert werden. Dies verhindert das Splitting in viele
+  kleine Dateien und fördert die Übersichtlichkeit, da auf einem Blick (optimalerweise) alle genutzten
+  Controller und Services sowie die Konfiguration ersichtlich wird.
+
 ## Directory structure
 
 Keep data together:
@@ -7,7 +22,10 @@ Keep data together:
 * There is no practical solution to map names to files. So we put everything used by one module
   into one file.
   
-
+* Die Hauptdatei `<modname>.js` trägt den Namen des parent-Vereichnis. Dies klingt zunächst doppelt-gemoppelt, hat 
+  jedoch folgenden Grund: Die Alternative wäre nämlich, die Hauptdatei immer `module.js` o.ä. zu nennen - 
+  Allerdings kann das zu Problemen mit der IDE führen, da diese normalerweise nur den Dateinamen (ohne Verzeichnis) 
+  in der Schnellansicht anzeigen. Außerdem zeigt auch GIT in der Schnellansicht die Änderungen nur per Dateinamen an.
 
 ```
 ---- app/
@@ -65,8 +83,6 @@ angular.module ("module.<modname>", [])
 Sollte die Datei zu groß werden, können Services, die ausschließlich von diesem Modul
 konsumiert werden auch unter dessen Namespace als eigene Datei gespeichert werden:
 
-```
-```
 
 ## Services (global)
 
@@ -76,6 +92,10 @@ Wird ein Service von mehr als einem Modul genutzt, ist dieser unterhalb des Name
 Im Gegensatz zur Definition von Controllern, ist ein Service __immer__ als eigenständige
 Klasse (`function ServiceName ()`) zu definieren und dem Module per factory zu übergeben.
 
+Diskussion:
+* __Warum eigenständige Klasse?__: Services können per DI in Controllern oder anderen Services aufgerufen werden.
+  Die Definition als eigenständige Klasse ermöglicht der IDE die Code-Completion.
+
 Ein Beispiel:
 
 ```js
@@ -84,7 +104,7 @@ function SomeService (param) {
     ..some code..
 }
 
-angular.module ("service.<serviceName>", []).service ("SomeService", SomeService);
+angular.module ("service.<serviceName>", []).factory ("SomeService", function () { return new SomeService() });
 
 ```
 
