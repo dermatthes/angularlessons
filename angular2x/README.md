@@ -54,8 +54,7 @@ Keep data together:
 ---------------- template1.tpl.js .............. Templates located close to the js
 -------- lib/ .................................. 3rd Party libraries
 -------- asset/
------------- css/ .............................. CSS used by the main module
------------- 
+------------ css/ .............................. CSS used by main site.
 ```
 
 
@@ -122,7 +121,11 @@ angular.module ("service.<serviceName>", []).factory ("SomeService", function ()
 Es gibt keine Initialisierungdatei. Es wird lediglich das Hauptmodul `module.main` der Controller
 `MainCtrl` aufgerufen.
 
-
+```html
+<html ng-app="module.main" ng-controller="MainCtrl as main">
+...
+</html>
+```
 
 ### `$scope` sollte nicht mehr genutzt werden
 
