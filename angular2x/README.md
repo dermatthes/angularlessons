@@ -24,8 +24,8 @@ Keep data together:
 * __One file module-policy__: There is no practical solution to map names to files. So we put everything used by one module
   into one file.
   
-* __Kein Ermessensspielraum für Namespace__: Es sollte nicht im ermessen des Programmierers liegen, ob ein
-  Modul global, Ressource oder ähnliches ist. Deshalb gibt es eine klare Verzeichnisstrukur mit klaren Regeln,
+* __Kein Ermessensspielraum für Namespace__: Es sollte nicht im Ermessen des Programmierers liegen, ob ein
+  Modul global, Ressource oder ähnliches ist. Deshalb gibt es eine klare Verzeichnisstrukur mit klaren Regeln
   welche Datei wo hin gehört.
   
 * __Die Hauptdatei `<modname>.js` trägt den Namen des parent-Vereichnis.__ Dies klingt zunächst doppelt-gemoppelt, hat 
