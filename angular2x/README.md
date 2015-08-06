@@ -1,4 +1,4 @@
-# Angular 2.0 aware best practise
+# Angular 2.0 aware best practice
 
 ## Aufbauorganisation und Definition des Projekts
 
@@ -115,7 +115,7 @@ angular.module ("service.<serviceName>", []).factory ("SomeService", function ()
 ```
 
 
-## Best-Practise
+## Best-Practice
 
 ### Das Hauptmodul `module.main`
 
