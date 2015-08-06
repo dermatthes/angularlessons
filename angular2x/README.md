@@ -24,6 +24,10 @@ Keep data together:
 * __One file module-policy__: There is no practical solution to map names to files. So we put everything used by one module
   into one file.
   
+* __Kein Ermessensspielraum für Namespace__: Es sollte nicht im ermessen des Programmierers liegen, ob ein
+  Modul global, Ressource oder ähnliches ist. Deshalb gibt es eine klare Verzeichnisstrukur mit klaren Regeln,
+  welche Datei wo hin gehört.
+  
 * __Die Hauptdatei `<modname>.js` trägt den Namen des parent-Vereichnis.__ Dies klingt zunächst doppelt-gemoppelt, hat 
   jedoch folgenden Grund: Die Alternative wäre nämlich, die Hauptdatei immer `module.js` o.ä. zu nennen - 
   Allerdings kann das zu Problemen mit der IDE führen, da diese normalerweise nur den Dateinamen (ohne Verzeichnis) 
@@ -56,6 +60,14 @@ Keep data together:
 -------- asset/
 ------------ css/ .............................. CSS used by main site.
 ```
+
+### Eindeutige Abbildung Namespace <=> Dateisystem
+
+Jedes Modul und jeder Service __muss__ vom Namespace 1:1 auf das Dateisystem abbildbar sein.
+
+Beispiel:
+
+module.main.service.searchService => /app/module/main/service/searchService.js
 
 
 ### Defining Modules
