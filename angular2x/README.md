@@ -56,8 +56,6 @@ Keep data together:
 -------- asset/
 ------------ css/ .............................. CSS used by the main module
 ------------ 
----- app.route.js .............................. The main Routes
----- app.module.js ............................. Initialisiation of the main Module, etc.
 ```
 
 
@@ -118,6 +116,13 @@ angular.module ("service.<serviceName>", []).factory ("SomeService", function ()
 
 
 ## Best-Practise
+
+### Das Hauptmodul `module.main`
+
+Es gibt keine Initialisierungdatei. Es wird lediglich das Hauptmodul `module.main` der Controller
+`MainCtrl` aufgerufen.
+
+
 
 ### `$scope` sollte nicht mehr genutzt werden
 
