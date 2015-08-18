@@ -43,3 +43,6 @@ und bindet anhand des Namens die Klassen ein.
 
 `$scope` definiert alle Werte, auf die in den Templates zugegriffen werden kann. Ändere ich etwas an $scope, wirkt
 sich die Änderung direkt auf das Template aus.
+
+**Achtung** $scope ist ab Angular 2.0 deprecated!
+Stattdessen sollte `Controller as ` -syntax und `this` genutzt werden. Siehe /angular2.x

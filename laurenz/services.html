@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="demo2" ng-controller="MainCtrl as main">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>{{ main.site.title }}</title>
+    <script language="JavaScript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>
+</head>
+<body>
+
+    <button ng-click="main.showMainTemplate();">showMainTemplate</button>
+
+    <input ng-model="main.site.title" >
+
+    <div ng-if="main.site.mainDivUrl != '' " ng-controller="SubCtrl as sub">
+        <input ng-model="sub.site.title" >
+        <input ng-model="main.site.title" >
+        <div ng-include="main.site.mainDivUrl"></div>
+    </div>
+
+</body>
+
+<script type="text/javascript">
+    var app = angular.module("demo2", []);
+    function SiteService() {
+        this.title = "Default";
+        this.mainDivUrl = "";
+        this.subDivUrl = "";
+    }
+    
+    app.factory("SiteService", function() {
+        return new SiteService(); 
+    });
+    
+    app.controller("MainCtrl", ["SiteService", function(SiteService) {
+        this.site = SiteService;
+        this.showMainTemplate = function () {
+            this.site.mainDivUrl = "demo.inc.html";
+        }
+    }]);
+
+    app.controller("SubCtrl", ["SiteService", function(SiteService) {
+        this.site = SiteService;
+    }]);
+
+</script>
+
+</html>
