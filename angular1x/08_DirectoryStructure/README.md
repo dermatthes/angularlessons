@@ -1,9 +1,13 @@
 # Directory structure
 
+
 Wie sollte ein Angular-Projekt aufgebaut sein, damit es möglichst einfach zu warten ist und
 per Classloader automatisch geladen werden kann?
 
-## Best Practise
+## --Best Practice--
+
+__Nicht mehr verwenden. Siehe angular2x für die aktuelle, übersichtliche Aufteilung__
+
 
 Es bietet sich eine Aufteilung nach Funktionsbereichen an um dem Suchen von unterschiedlichen
 Teilen eines Widgets in mehreren Vereichnissen vorzubeugen.

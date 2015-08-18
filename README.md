@@ -1,7 +1,7 @@
 # angularlessons
 Conception / developing best practise for teaching angularjs
 
-__see folder `angular2x/` for bleeding-edge how-tos and best practise__
+__see folder `angular2x/` for bleeding-edge how-tos and best practice__
 
 Other folders are for those who want to understand the development process of this
 guide.
