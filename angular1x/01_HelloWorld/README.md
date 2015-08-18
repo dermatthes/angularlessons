@@ -26,7 +26,7 @@ Wir verbinden das aktuelle HTML-Template mit der App und dem Controller
 var app = angular.module("de.leuffen.helloWorld", []);
 ```
 
-Der Parameter 2 `[]` definiert die Abhängigkeiten. Dieser Parameter muss angegeben werden. Sonst startet die App nicht.
+Der Parameter 2 `[]` definiert die Abhängigkeiten. Dieser Parameter **muss** angegeben werden. Sonst startet die App nicht.
 
 
 ## Unser erster Controller
