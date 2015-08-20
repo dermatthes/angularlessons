@@ -161,7 +161,7 @@ Im Template wird die `controller as` Konstruktion genutzt:
 
 ### Setzen von Werten im Parent-Scope
 
-Im Gegensatz zur nutzung von `$scope` können auf diese Weise keine Methoden/Werte im paren-Scope
+Im Gegensatz zur Nutzung von `$scope` können auf diese Weise keine Methoden/Werte im paren-Scope
 gesetzt werden. Soll z.B. der titel auch von ChildCtrl aus geändert werden können, so muss der
 Title vorher als Service zu definieren:
 
