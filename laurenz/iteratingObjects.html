@@ -1,0 +1,26 @@
+<html ng-app="iterating" ng-controller="MainCtrl as main">
+    <head>
+        <script language="JavaScript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>
+    </head>
+
+    <body>
+        <h1>JSON-Objekte ausgeben</h1>
+        <p>
+            Im folgenden wird ein Objekt ausgegeben, dessen Keys wir nicht kennen.<br>
+            Diese lassen sich, &auml;hnlich wie foreach() in PHP ausgeben, indem man `ng-repeat="(key, val) in jsonObj` nutzt.
+        </p>
+
+        <ul ng-repeat="(key, val) in main.obj">
+            <li>{{key}} => {{ val }}</li>
+        </ul>
+    </body>
+
+    <script type="text/javascript">
+        var app = angular.module("iterating", []);
+
+        app.controller("MainCtrl", ["$scope", function($scope) {
+            var self = this;
+            this.obj = {key1:"val1", key2:"val2"};
+        }]);
+    </script>
+</html>
